@@ -15,6 +15,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('classroom_id')->constrained()->cascadeOnDelete();
+            $table->string('nisn')->unique();
+            $table->string('phone_number');
+            $table->enum('gender',['male','female']);
+            $table->text('adress')->nullable();
+            $table->string('profile_picture')->nullable();      
+
             $table->timestamps();
         });
     }
