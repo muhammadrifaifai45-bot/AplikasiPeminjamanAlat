@@ -32,7 +32,7 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogoHeight('5.5rem')
             ->login()
             ->colors([
-                'primary' => Color::Blue,
+                'primary' =>'#2390cf',
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
