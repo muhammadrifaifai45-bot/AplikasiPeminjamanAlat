@@ -15,11 +15,14 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Ramsey\Uuid\Type\Integer;
 use UnitEnum;
 
 class StudentResource extends Resource
 {
     protected static ?string $model = Student::class;
+    protected static ?int $navigationSort = 1;
+
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-academic-cap';
     protected static string|BackedEnum|null $activeNavigationIcon = 'heroicon-s-academic-cap';
