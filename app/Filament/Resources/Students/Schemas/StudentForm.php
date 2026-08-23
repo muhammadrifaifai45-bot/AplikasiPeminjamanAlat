@@ -15,16 +15,22 @@ class StudentForm
             ->components([
                 TextInput::make('user_id')
                     ->required()
-                    ->numeric(),
+                    ->label('siswa')
+                    ->relationship('user','name'),
                 TextInput::make('classroom_id')
                     ->required()
-                    ->numeric(),
+                    ->label('kelas')
+                    ->relationship('clasroom','name'),  
                 TextInput::make('nisn')
-                    ->required(),
+                    ->required()
+                    ->unique(ignoreRecord:true)
+                    ->validationMessages(['unique' => 'The NISN has Already'])
+                    ->label('NISN'),
                 TextInput::make('phone_number')
                     ->tel()
                     ->required(),
                 Select::make('gender')
+                    ->label('gender')
                     ->options(['male' => 'Male', 'female' => 'Female'])
                     ->required(),
                 Textarea::make('adress')

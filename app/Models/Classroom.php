@@ -6,5 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Classroom extends Model
 {
-    //
+    protected $fillable=[
+        'major_id',
+        'name',
+        'level',
+        'is_active',
+    ];
+
+    public function Major(){
+        return $this->belongsTo(Major::class);
+    }
+   
+    public function Student(){
+        return $this->hashOne(Student::class);
+   }
 }

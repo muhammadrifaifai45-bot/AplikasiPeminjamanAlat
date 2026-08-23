@@ -2,13 +2,17 @@
 
 namespace App\Filament\Resources\Classrooms\Tables;
 
+use App\Models\Major;
+use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use NunoMaduro\Collision\Adapters\Phpunit\State;
 
 class ClassroomsTable
 {
@@ -17,13 +21,21 @@ class ClassroomsTable
         return $table
             ->columns([
                 TextColumn::make('major_id')
-                    ->numeric()
+                    ->label('major')
+                    ->searchable()
                     ->sortable(),
                 TextColumn::make('name')
                     ->searchable(),
                 TextColumn::make('level')
-                    ->numeric()
-                    ->sortable(),
+                    ->label('kelas')
+                    ->sortable()
+                    ->formatStateUsing(fn($state)=>match ($state){
+                        //untuk mengubah nilai format form yang sebelumnya berisi data kelas yang telah di input menjadi nilai yang tersedia pada array di bawah
+                        10 => 'kelas X',
+                        11 => 'kelas XI',
+                        12 => 'kelas XII'
+                    }),
+                    
                 IconColumn::make('is_active')
                     ->boolean(),
                 TextColumn::make('created_at')
@@ -39,8 +51,12 @@ class ClassroomsTable
                 //
             ])
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
+                ActionGroup::make([
+                    ViewAction::make(),
+                    EditAction::make(),
+                    DeleteAction::make(),
+                ])
+              
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

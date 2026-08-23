@@ -6,5 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Major extends Model
 {
-    //
+    protected $fillable = [
+       'name',
+       'code',
+       'is_active'
+
+    ];
+
+    public function classes(){
+        return $this->belongsToMany(Classroom::class);
+    }
 }
+    
