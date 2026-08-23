@@ -37,6 +37,8 @@ class StudentForm
                     ->default(null)
                     ->columnSpanFull(),
                 TextInput::make('profile_picture')
+                    ->label('Profile Picture')
+                    ->disk('public')
                     ->default(null),
             ]);
     }
