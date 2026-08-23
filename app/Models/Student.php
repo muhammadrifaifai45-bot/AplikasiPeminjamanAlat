@@ -20,7 +20,7 @@ class Student extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function student(){
+    public function clasroom(){
         return $this->belongsTo(Classroom::class);
     }
     

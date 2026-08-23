@@ -2,10 +2,13 @@
 
 namespace App\Filament\Resources\Students\Schemas;
 
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Schema;
+
+use function Laravel\Prompts\select;
 
 class StudentForm
 {
@@ -13,14 +16,14 @@ class StudentForm
     {
         return $schema
             ->components([
-                TextInput::make('user_id')
-                    ->required()
+                Select::make('user_id')
                     ->label('siswa')
-                    ->relationship('user','name'),
-                TextInput::make('classroom_id')
-                    ->required()
+                    ->relationship('user','name')
+                    ->required(),
+                select::make('classroom_id')
                     ->label('kelas')
-                    ->relationship('clasroom','name'),  
+                    ->relationship('clasroom','name')
+                    ->required(),
                 TextInput::make('nisn')
                     ->required()
                     ->unique(ignoreRecord:true)
@@ -36,7 +39,7 @@ class StudentForm
                 Textarea::make('adress')
                     ->default(null)
                     ->columnSpanFull(),
-                TextInput::make('profile_picture')
+                FileUpload::make('profile_picture')
                     ->label('Profile Picture')
                     ->disk('public')
                     ->default(null),
