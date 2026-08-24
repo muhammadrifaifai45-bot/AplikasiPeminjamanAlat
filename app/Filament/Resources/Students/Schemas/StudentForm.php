@@ -16,13 +16,13 @@ class StudentForm
     {
         return $schema
             ->components([
-                Select::make('user_id')
+                select::make('user_id')
                     ->label('siswa')
                     ->relationship('user','name')
                     ->required(),
                 select::make('classroom_id')
                     ->label('kelas')
-                    ->relationship('clasroom','name')
+                    ->relationship('classroom','name')
                     ->required(),
                 TextInput::make('nisn')
                     ->required()

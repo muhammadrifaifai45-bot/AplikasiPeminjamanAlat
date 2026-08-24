@@ -8,7 +8,7 @@ class Student extends Model
 {
     protected $fillable =[
         'user_id',
-        'clasroom_id',
+        'classroom_id',
         'nisn',
         'phone_number',
         'gender',
@@ -20,7 +20,7 @@ class Student extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function clasroom(){
+    public function classroom(){
         return $this->belongsTo(Classroom::class);
     }
     
