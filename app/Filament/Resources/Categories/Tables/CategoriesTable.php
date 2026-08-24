@@ -11,6 +11,7 @@ use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\Layout\Grid;
+use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -31,9 +32,13 @@ class CategoriesTable
                 Grid::make([
                     'default'=>1
                 ])->schema([
-                    ImageColumn::make('image'),
-                    TextColumn::make('name')
-                    ->searchable(),
+                    Stack::make([
+                        ImageColumn::make('image')
+                        ->imageSize(150),
+                        TextColumn::make('name')
+                        ->searchable(),
+                    ]),
+                  
                 ]),
                 TextColumn::make('description')
                     ->searchable(),
