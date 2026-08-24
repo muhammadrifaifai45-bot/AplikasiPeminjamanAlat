@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Filament\Resources\Classrooms\Tables;
+namespace App\Filament\Resources\Categories\Tables;
 
-use App\Models\Major;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -10,32 +9,34 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\Layout\Grid;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use NunoMaduro\Collision\Adapters\Phpunit\State;
 
-class ClassroomsTable
+class CategoriesTable
 {
     public static function configure(Table $table): Table
     {
         return $table
+
+        ->contentGrid([
+            'xl' => 4,
+            'lg' =>3,
+            'md' => 2,
+        ])
+           
+        
             ->columns([
-                TextColumn::make('major.name')
-                    ->label('major')
-                    ->searchable()
-                    ->sortable(),
-                TextColumn::make('name')
+                Grid::make([
+                    'default'=>1
+                ])->schema([
+                    ImageColumn::make('image'),
+                    TextColumn::make('name')
                     ->searchable(),
-                TextColumn::make('level')
-                    ->label('kelas')
-                    ->sortable()
-                    ->formatStateUsing(fn($state)=>match ($state){
-                        //untuk mengubah nilai format form yang sebelumnya berisi data kelas yang telah di input menjadi nilai yang tersedia pada array di bawah
-                        10 => 'kelas X',
-                        11 => 'kelas XI',
-                        12 => 'kelas XII'
-                    }),
-                    
+                ]),
+                TextColumn::make('description')
+                    ->searchable(),
                 IconColumn::make('is_active')
                     ->boolean(),
                 TextColumn::make('created_at')
@@ -56,7 +57,7 @@ class ClassroomsTable
                     EditAction::make(),
                     DeleteAction::make(),
                 ])
-              
+
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
