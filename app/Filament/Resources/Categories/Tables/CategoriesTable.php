@@ -21,47 +21,46 @@ class CategoriesTable
     {
         return $table
 
-        ->contentGrid([
-            'xl' => 4,
-            'lg' =>3,
-            'md' => 2,
-        ])
-           
-        
+            ->contentGrid([
+                'xl' => 4,
+                'lg' => 3,
+                'md' => 2,
+            ])
+
+
             ->columns([
                 Grid::make([
-                    'default'=>1
+                    'default' => 1
                 ])->schema([
                     Stack::make([
                         ImageColumn::make('image')
-                        ->imageSize(150),
+                            ->imageSize(200),
                         TextColumn::make('name')
-                        ->searchable(),
+                            ->weight('bold')
+                            ->searchable(),
                     ]),
-                  
+
                 ]),
                 TextColumn::make('description')
                     ->searchable(),
-                IconColumn::make('is_active')
-                    ->boolean(),
+                TextColumn::make('is_active')
+                    ->formatStateUsing(fn($state) => $state ? 'Active' : 'Inactive')
+                    ->badge()
+                    ->color(fn($state) => $state ? 'success' : 'danger'),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(isToggledHiddenByDefault: true)
             ])
             ->filters([
                 //
             ])
             ->recordActions([
-                ActionGroup::make([
-                    ViewAction::make(),
-                    EditAction::make(),
-                    DeleteAction::make(),
-                ])
+
+                ViewAction::make(),
+                EditAction::make(),
+                DeleteAction::make(),
+
 
             ])
             ->toolbarActions([
