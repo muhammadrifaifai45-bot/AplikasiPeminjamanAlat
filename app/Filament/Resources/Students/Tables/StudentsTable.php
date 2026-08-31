@@ -2,7 +2,9 @@
 
 namespace App\Filament\Resources\Students\Tables;
 
+use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
@@ -10,6 +12,7 @@ use Filament\Support\Enums\FontWeight;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\Layout\Grid;
+use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -19,7 +22,7 @@ class StudentsTable
     {
         return $table
 
-        ->contentGrid([
+        ->contentGrid([     
             'xl' => 4,
             'lg' => 3,
             'md' => 2,
@@ -32,7 +35,9 @@ class StudentsTable
                     ->disk('public')        
                     ->imageSize(200)
                     ->circular(),
-                    TextColumn::make('user.name')
+
+                    Stack::make([
+                        TextColumn::make('user.name')
                         ->label('Student Name')
                         ->sortable()
                         ->weight(FontWeight::Bold),
@@ -47,9 +52,12 @@ class StudentsTable
                     TextColumn::make('phone_number')
                         ->icon(Heroicon::PhoneArrowDownLeft)
                         ->searchable(),
-                    TextColumn::make('gender')
+                        TextColumn::make('gender')
                         ->label('gender')
                         ->badge(),
+                    ]),
+                
+                   
                 ]),
                
                 TextColumn::make('created_at')
@@ -66,7 +74,12 @@ class StudentsTable
             ])
             ->recordActions([
                 ViewAction::make(),
+                ActionGroup::make([
                 EditAction::make(),
+                DeleteAction::make(),
+                ])
+               
+                
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
