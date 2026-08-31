@@ -21,9 +21,11 @@ return new class extends Migration
             $table->integer('damaged_qty');
             $table->integer('borrowed_qty');
             $table->integer('lost_qty');
-            $table->boolean('is_active')->default(true);
+            $table->boolean('is_available')->default(true);
             $table->timestamps();
         });
+
+     
     }
 
     /**
