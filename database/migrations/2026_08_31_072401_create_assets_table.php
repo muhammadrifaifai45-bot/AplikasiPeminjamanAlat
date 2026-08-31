@@ -16,7 +16,12 @@ return new class extends Migration
             $table->foreignId('Category_id')->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->string('code')->unique();
-            $table->
+            $table->integer('total_qty');
+            $table->integer('good_qty');
+            $table->integer('damaged_qty');
+            $table->integer('borrowed_qty');
+            $table->integer('lost_qty');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
