@@ -12,7 +12,7 @@ class Student extends Model
         'nisn',
         'phone_number',
         'gender',
-        'addres',
+        'adress',
         'profile_picture'
     ];
 

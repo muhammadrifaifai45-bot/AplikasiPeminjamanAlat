@@ -44,7 +44,7 @@ class StudentInfolist
                         TextEntry::make('phone_number')
                             ->icon(Heroicon::PhoneArrowUpRight)
                             ->label('Kontak siswa'),
-                        TextEntry::make('addres')
+                        TextEntry::make('adress')
                             ->icon(Heroicon::MapPin)
                             ->label('Alamat Siswa'),
 
