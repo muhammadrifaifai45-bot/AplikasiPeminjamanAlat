@@ -31,7 +31,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->brandlogo(asset('apkpinjam.png'))
-            ->darkModeBrandLogo(asset('darkmodeapkpreview.png'))    
+            ->darkModeBrandLogo(asset('darkmodeapkpreview.png'))       
             ->brandLogoHeight('5.5rem')
             ->login()
             ->colors([

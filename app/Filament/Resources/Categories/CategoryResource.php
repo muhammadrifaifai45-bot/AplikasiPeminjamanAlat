@@ -24,7 +24,7 @@ class CategoryResource extends Resource
     protected static ?int $navigationSort = 1;
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-squares-2x2';
     protected static string|BackedEnum|null $activeNavigationIcon = 'heroicon-s-squares-2x2';
-    protected static string|UnitEnum|null $navigationGroup = 'Asset Managment';
+    protected static string|UnitEnum|null $navigationGroup = 'Asset Management';
     
 
     protected static ?string $recordTitleAttribute = 'name';
