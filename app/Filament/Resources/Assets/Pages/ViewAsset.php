@@ -19,12 +19,15 @@ class ViewAsset extends ViewRecord
     }
 
     public function getnama(): string|Htmlable{
-        return $this->record->asset->name;
+        return $this->record->name;
     }
 
     public function getBreadcrumb(): string
     {
-        return $this->record->asset->name;
+        return $this->record->name;
     }
+
+    
+
     
 }
