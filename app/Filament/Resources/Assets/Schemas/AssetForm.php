@@ -5,6 +5,8 @@ namespace App\Filament\Resources\Assets\Schemas;
 use App\Models\Asset;
 use App\Models\Category;
 use Filament\Forms\Components\Field;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -37,7 +39,7 @@ class AssetForm
                         Fieldset::make('Detail Asset')
                             ->schema([
 
-                                Select::make('Category_id')
+                                Select::make('category_id')
                                     ->relationship('category', 'name')
                                     ->label('Kategori Barang')
                                     ->required()
@@ -45,16 +47,16 @@ class AssetForm
                                     ->afterStateUpdated(function (Get $get, Set $set) {
 
                                         //Logic mencari variable dengan membungkus menggunakan variable $kategori dengan Category::find berdasarkan 'category_id'
-                                        $kategori = Category::find($get('category_id'));
+                                        $category = Category::find($get('category_id'));
 
-                                        if ($kategori) {
+                                        if (!$category) {
                                             return;
                                         }
 
-                                        $prefix = strtoupper(Str::substr($kategori->name, 0, 3));
+                                        $prefix = strtoupper(Str::substr($category->name,0,3));
 
-                                        
-                                        $KodeTerakhir = Asset::where('code', 'like', $prefix, '%')
+
+                                        $KodeTerakhir = Asset::where('code', 'like', $prefix. '%')
                                             ->orderBy('code', 'desc')
                                             ->value('code');
 
@@ -65,11 +67,11 @@ class AssetForm
                                             $nomorselanjutnya =1;
                                         }
                                         $kode = $prefix.str_pad($nomorselanjutnya, 3, '0', STR_PAD_LEFT);
-                                        $set('kode',$kode);
+                                        $set('code',$kode);
                                     }),
 
                                 TextInput::make('code')
-                                    ->required()
+                                    ->required() 
                                     ->reactive()
                                     ->readOnly(),
 
@@ -77,6 +79,22 @@ class AssetForm
                                 TextInput::make('name')
                                     ->columnSpanFull()
                                     ->required(),
+
+                                    RichEditor::make('description')
+                                    ->label('description')
+                                    ->extraAttributes([
+                                        'style' => 'min-height: 250px'
+                                    ])
+                                    ->columnSpanFull(),
+                                    FileUpload::make('image')
+                                    ->label('Asset Picture')
+                                    ->disk('public')
+                                    ->directory('Asset Picture')
+                                    ->default(null)
+                                    ->columnSpanFull()
+                                    
+                                   
+                                    
 
                             ]),
                         Toggle::make('is_available')

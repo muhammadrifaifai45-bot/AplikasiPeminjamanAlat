@@ -15,7 +15,9 @@ class Asset extends Model
         'damaged_qty',
         'borrowed_qty',
         'lost_qty',
-        'is_alvailable'
+        'is_avaliable',
+        'image',
+        'description'
     ];
 
     public function category(){
