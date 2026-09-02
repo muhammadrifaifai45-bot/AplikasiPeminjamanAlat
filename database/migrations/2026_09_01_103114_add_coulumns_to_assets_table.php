@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('assets', function (Blueprint $table) {
             $table->string('image')->nullable();
             $table->text('description')->nullable();
-            
+
         });
     }
 

@@ -10,6 +10,8 @@ class ListAssets extends ListRecords
 {
     protected static string $resource = AssetResource::class;
 
+    protected ?string $heading = 'Asset Barang sekolah';
+
     protected function getHeaderActions(): array
     {
         return [

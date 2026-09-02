@@ -15,11 +15,16 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
+use Illuminate\Contracts\Support\Htmlable;
 
 class AssetsTable
 {
+
+    
     public static function configure(Table $table): Table
     {
+
+       
         return $table
             ->columns([
                 ColumnGroup::make('Detail Asset',[
@@ -52,14 +57,18 @@ class AssetsTable
                     ->numeric(),
                 TextColumn::make('lost_qty')
                     ->label('lost')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('available_qty')
-                    ->label('Available')
                     ->numeric(),
-                TextColumn::make('total_qty')
+                    TextColumn::make('total_qty')
                     ->label('total')
                     ->numeric(),
+                TextColumn::make('available_qty')
+                    ->label('Available')
+                    ->numeric()
+
+                // di bawah ini ada getusing yang berisi logic fn atau(function name) yang berisi variable record yang merepesentasikan operasi artimatika 
+                // pengurangan beradasrkan column total_qty dan borrowed_qty
+                    ->getStateUsing(fn($record)=>$record->good_qty - $record->browwed_qty)
+                    ->badge(),
                 ]),
                 
                 IconColumn::make('is_available')
