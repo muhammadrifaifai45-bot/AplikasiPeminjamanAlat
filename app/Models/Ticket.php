@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ticket extends Model
 {
+    public $timestamps = false;
     protected $fillable =[
         'user_id',
         'asset_id',
@@ -13,8 +14,12 @@ class Ticket extends Model
         'qty',
         'Booked_at',
         'Borrowed_at',
+        'updated_at',
         'due_at',
-        'returned_at'
+        'returned_at',
+        'note',
+        'status'
+
     ];
 
     public function user(){

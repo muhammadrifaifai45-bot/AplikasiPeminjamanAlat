@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Tickets\Schemas;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -28,7 +29,12 @@ class TicketForm
                             ->label('Asset Name')
                             ->relationship('asset', 'name')
                             ->required(),
-                        DatePicker::make('due_at'),
+                        DatePicker::make('due_at')
+                        ->label('Due dat'),
+                        Textarea::make('note')
+                         ->label('Additional Note')
+                         ->columnSpanFull(),
+
                     ])->columns(3)
 
                     // untuk mengfulkan section 

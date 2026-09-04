@@ -8,4 +8,11 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateTicket extends CreateRecord
 {
     protected static string $resource = TicketResource::class;
+
+
+    protected function mutateFormDataBeforeCreate(array $data):array
+    {
+        $data ['ticket_number'] = 'REQ' . now()->format('Ymd'). '-'   .strtoupper(str()->random(4));
+        return $data;
+    }
 }

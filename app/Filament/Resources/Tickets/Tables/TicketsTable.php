@@ -2,7 +2,10 @@
 
 namespace App\Filament\Resources\Tickets\Tables;
 
+use Filament\Actions\Action;
+use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
@@ -15,14 +18,17 @@ class TicketsTable
     {
         return $table
             ->columns([
-                TextColumn::make('user_id')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('asset_id')
-                    ->numeric()
-                    ->sortable(),
                 TextColumn::make('ticket_number')
-                    ->searchable(),
+                ->label('Ticket#')
+                ->searchable(),
+                TextColumn::make('user.name')
+                ->label('Requester')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('asset.name')
+                    ->label('Asset Name')
+                    ->numeric()
+                    ->sortable(),
                 TextColumn::make('qty')
                     ->numeric()
                     ->sortable(),
@@ -35,16 +41,38 @@ class TicketsTable
                 TextColumn::make('due_at')
                     ->date()
                     ->sortable(),
+                    TextColumn::make('status')
+                    ->badge(),
                 TextColumn::make('returned_at')
                     ->dateTime()
                     ->sortable(),
+              
             ])
             ->filters([
                 //
             ])
             ->recordActions([
+                Action::make('Verify Borrowing')
+                ->label('Verify Borowing')
+                ->color('sucess')
+                ->visible(fn($record) => $record->status === 'Borowwed')
+                ->action(fn($record) => $record->update([
+                    'status' => 'Verifiying',    
+                ]))->button(),
+                Action::make('Approve Borowwing')
+                ->label('Approve Borowwing')
+                ->color('warning')
+                ->visible(fn($record) => $record->status === 'Booked')
+                ->action(fn($record) => $record->update([
+                    'status' =>'Borowwed',
+                    'Borrowed_at' => now(),
+                ]))->button(),
+                ActionGroup::make([
                 ViewAction::make(),
                 EditAction::make(),
+                DeleteAction::make()
+                ])
+                
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
