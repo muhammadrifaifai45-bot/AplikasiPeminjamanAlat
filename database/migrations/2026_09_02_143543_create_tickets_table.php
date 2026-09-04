@@ -17,11 +17,10 @@ return new class extends Migration
             $table->foreignId('asset_id')->constrained()->cascadeOnDelete();
             $table->string('ticket_number')->unique();
             $table->integer('qty')->default(1);
-            $table->timestamps('Booked_at')->useCurrent();
-            $table->timestamps('Borrowed_at')->nullable();
+            $table->timestamp('Booked_at')->useCurrent();
+            $table->timestamp('Borrowed_at')->nullable();
             $table->date('due_at')->nullable();
-            $table->timestamps('returned_at')->nullable();
-            $table->timestamps();
+            $table->timestamp('returned_at')->nullable();
         });
     }
 

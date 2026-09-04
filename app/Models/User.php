@@ -51,4 +51,9 @@ class User extends Authenticatable
     public function student(){
         return $this->hashOne(User::class);
     }
+
+
+    public function ticket(){
+        return $this->hasMany(Ticket::class);
+    }
 }

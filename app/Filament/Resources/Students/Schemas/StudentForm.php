@@ -19,9 +19,6 @@ class StudentForm
     {
         return $schema
             ->components([
-
-
-
                 select::make('user_id')
                     ->label('siswa')
                     ->required()

@@ -23,4 +23,8 @@ class Asset extends Model
     public function category(){
         return $this->belongsTo(Category::class);
     }
+
+    public function ticket(){
+        return $this->hasMany(ticket::class);
+    }
 }

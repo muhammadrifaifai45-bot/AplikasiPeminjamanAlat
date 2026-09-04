@@ -16,4 +16,10 @@ class Category extends Model
     public function Asset(){
         return $this->hasMany(Asset::class);
     }
+
+    public function Ticket(){
+        return $this->hasMany(Ticket::class);
+    }
+
+
 }
