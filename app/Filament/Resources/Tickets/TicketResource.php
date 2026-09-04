@@ -15,12 +15,17 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class TicketResource extends Resource
 {
     protected static ?string $model = Ticket::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?int $navigationSort = 2;
+    
+    protected static string|UnitEnum|null $navigationGroup = 'Asset Management';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-ticket';
+    protected static string|BackedEnum|null $activeNavigationIcon = 'heroicon-s-ticket';
 
     protected static ?string $recordTitleAttribute = 'id';
 

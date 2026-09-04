@@ -52,13 +52,8 @@ class TicketsTable
                 //
             ])
             ->recordActions([
-                Action::make('Verify Borrowing')
-                ->label('Verify Borowing')
-                ->color('sucess')
-                ->visible(fn($record) => $record->status === 'Borowwed')
-                ->action(fn($record) => $record->update([
-                    'status' => 'Verifiying',    
-                ]))->button(),
+             
+
                 Action::make('Approve Borowwing')
                 ->label('Approve Borowwing')
                 ->color('warning')
@@ -66,6 +61,23 @@ class TicketsTable
                 ->action(fn($record) => $record->update([
                     'status' =>'Borowwed',
                     'Borrowed_at' => now(),
+                ]))->button(),
+
+                Action::make('Verify return')
+                ->label('Verify Return')
+                ->color('warning')
+                ->visible(fn($record) => $record->status === 'Borowwed')
+                ->action(fn($record) => $record->update([
+                    'status' => 'Verifiying',    
+                ]))->button(),
+
+                Action::make('completed')
+                ->label('Completed')
+                ->color('success')
+                ->visible(fn($record) => $record->status === 'Verifiying')
+                ->action(fn($record) => $record->update([
+                    'status' => 'returned',
+                    'returned_at' => now(),
                 ]))->button(),
                 ActionGroup::make([
                 ViewAction::make(),
