@@ -51,7 +51,7 @@ class TicketsTable
                         default => ucfirst($state)
                     })
 
-                    ->formatStateUsing(fn(string $state): string => match($state){
+                    ->color(fn(string $state): string => match($state){
                         'Booked' => 'info',
                         'Borowwed' => 'success',
                         'Verifiying' => 'warning',
